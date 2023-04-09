@@ -9,19 +9,32 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <section id="start">
-        <h1>Quiz</h1>
-        <button>Start</button>
-        <h2>Press start</h2>
-    </section>
-    <section id="questions">
-        <h1 id="question">Question</h1>
-        <button id="op1">1</button>
-        <button id="op2">2</button>
-        <button id="op3">3</button>
-        <button id="op4">4</button>
-    </section>
-
+    <div id="timer">
+        <h3 id="timerText">time</h3>
+    </div>
+    <content>
+        <section class="page" id="start">
+            <h1>Quiz</h1>
+            <button>Start</button>
+            <h2>Press start</h2>
+        </section>
+        <section class="page" id="questions">
+            <h1 id="question">Question</h1>
+            <button id="op1" data-state="">1</button>
+            <button id="op2" data-state="">2</button>
+            <button id="op3" data-state="">3</button>
+            <button id="op4" data-state="">4</button>
+            <h2 id="result"></h2>
+        </section>
+    
+        <section class="page" id="highScores">
+            <h1>High Score</h1>
+            <ul id="scores"></ul>
+            <form id="todo-form" method="POST">
+                <input type="text" placeholder="Put initials here" name="todo-text" id="scoreIni" />
+            </form>
+        </section>
+    </content>
 
 
 

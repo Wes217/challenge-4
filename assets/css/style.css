@@ -1,8 +1,13 @@
 body{
+    height: 100%;
+}
+content{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 98.3%;
 }
+
 section{
     display: flex;
     flex-direction: column;
@@ -16,8 +21,20 @@ h1{
 h2{
     margin: 50px;
 }
-    
+#timer{
+    display:flex;
+}
+
+/* #start{
+    display: none;
+} */
 #questions {
     display: none;
     align-items:start;
+}
+#highScores{
+    display: none
+}
+#scores{
+    margin: 50px;
 }
