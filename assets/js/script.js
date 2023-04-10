@@ -8,7 +8,9 @@ var op3 = document.querySelector("#op3");
 var op4 = document.querySelector("#op4");
 var question = document.querySelector('#question')
 var result = document.querySelector('#result')
-
+var scoreInput = document.querySelector("#score-text")
+var scoreForm = document.querySelector('#score-form')
+var scoreList = document.querySelector('#score-list')
 //-----
 var question1 = {
     quest: 'what color is the sky',
@@ -44,8 +46,8 @@ var question3 = {
     an4:'wrong'
 }
 var questionsSets = [question1,question2,question3];
-
-
+var scores = []
+var names = []
 //-----
 startEl.addEventListener('click',function(event){
     var element = event.target;
@@ -95,21 +97,25 @@ function scorePage(){
     highScoreEl.style.display="flex";
 
 }
+
+
 //-----
 function timer(){
-    var timeLeft = 30 ;
+    var timeLeft = questionsSets.length*10 ;
 
+ 
     var timeInterval = setInterval(function () {
         timeLeft--;
         timerEl.textContent ='Time:'+ timeLeft;
-        
         if (i > questionsSets.length - 1){
             clearInterval(timeInterval)
+            scores.push(timeLeft)
         }
         if (timeLeft <= 0){
             clearInterval(timeInterval)
             scorePage()
             timerEl.textContent ='Time: 0';
+            scores.push(timeLeft)
         }
         
 
@@ -127,12 +133,66 @@ function timer(){
             setQuestion()
             return
         }
+        
     })
     
+
+}
+
+function init(){
+    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    var storedNames = JSON.parse(localStorage.getItem("names"));
+    if(storedScores !== null){
+        scores = storedScores
+        names = storedNames
+    }
+    renScores();
+}
+
+function renScores(){
+    scoreList.innerHTML = "";
+
+    for(var i = 0; i < scores.length; i++){
+        var score = scores[i];
+        var name =  names[i]
+
+        var li = document.createElement('li');
+        li.textContent = name + '-' + score
+
+        scoreList.appendChild(li);
+    }
+}
+
+function storeScores(){
+    localStorage.setItem("scores", JSON.stringify(scores));
+    localStorage.setItem("names", JSON.stringify(names));
 }
 
 
+scoreForm.addEventListener('submit',function(event){
+    event.preventDefault();
+    var initials = scoreInput.value
+    if(initials === '')return;
+    names.push(scoreInput.value)
+    if(names.length > scores.length ){
+        names.pop()
 
+    }
+    storeScores()
+    renScores()
+})
+
+highScoreEl.addEventListener('click',function(event){
+    var element = event.target;
+    
+    if(!element.matches('button'))return
+    names = []
+    scores = []
+
+    renScores()
+})
+
+init()
 
 
 

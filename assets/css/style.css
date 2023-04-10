@@ -1,11 +1,8 @@
-body{
-    height: 100%;
-}
+
 content{
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 98.3%;
+    
 }
 
 section{
@@ -35,6 +32,6 @@ h2{
 #highScores{
     display: none
 }
-#scores{
-    margin: 50px;
+#score-list{
+    height: 50px;
 }
