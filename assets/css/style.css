@@ -33,5 +33,5 @@ h2{
     display: none
 }
 #score-list{
-    height: 50px;
+    min-height: 50px;
 }
