@@ -13,36 +13,36 @@ var scoreForm = document.querySelector('#score-form')
 var scoreList = document.querySelector('#score-list')
 //-----
 var question1 = {
-    quest: 'what color is the sky',
-    opOne:'blue',
+    quest: 'Which word is used to define a variable?',
+    opOne:'function',
     an1:'wrong',
-    opTwo:'purple',
+    opTwo:'var',
     an2:'correct',
-    opThree:'green',
+    opThree:'event',
     an3:'wrong',
-    opFour:'red',
+    opFour:'object',
     an4:'wrong'
 }
 var question2 = {
-    quest: 'what color is this guy',
-    opOne:'blue',
+    quest: 'What does the debugger statement do?',
+    opOne:'Creates a break point in the program.',
     an1:'correct',
-    opTwo:'purple',
+    opTwo:'It will debug error in the statement.',
     an2:'wrong',
-    opThree:'green',
+    opThree:'It will debug all the errors in the the program.',
     an3:'wrong',
-    opFour:'red',
+    opFour:'All of the above',
     an4:'wrong'
 }
 var question3 = {
-    quest: 'what color is that spy',
-    opOne:'blue',
-    an1:'correct',
-    opTwo:'purple',
+    quest: 'Which function is used to turn an object into a JSON string',
+    opOne:'parse',
+    an1:'wrong',
+    opTwo:'convert',
     an2:'wrong',
-    opThree:'green',
-    an3:'wrong',
-    opFour:'red',
+    opThree:'stringify',
+    an3:'correct',
+    opFour:'none of the above',
     an4:'wrong'
 }
 var questionsSets = [question1,question2,question3];
@@ -66,7 +66,7 @@ function setQuestion(){
         i=0
         scorePage()
     }
-    console.log(i)
+    // console.log(i)
     question.textContent = questionsSets[i].quest
     op1.textContent = questionsSets[i].opOne
     op1.setAttribute('data-state',questionsSets[i].an1)
@@ -77,28 +77,9 @@ function setQuestion(){
     op4.textContent = questionsSets[i].opFour
     op4.setAttribute('data-state',questionsSets[i].an4)
     i++
-    
 }
 
-questionsEl.addEventListener('click',function(event){
-    var element = event.target;
 
-    if(!element.matches('button'))return
-    var state = element.getAttribute('data-state')
-    console.log(state)
-    if(state === 'correct'){
-        result.textContent = state
-        setQuestion()
-        return
-    }
-    if(state === 'wrong'){
-        result.textContent = state
-        // timerEl.textContent ='Time:'+ timeLeft + ' - 10';
-        setQuestion()
-        return
-    }
-
-})
 //-----
 function scorePage(){
     questionsEl.style.display="none"
@@ -109,8 +90,9 @@ function scorePage(){
 
 //-----
 function timer(){
-    var timeLeft = 35 ;
+    var timeLeft = questionsSets.length*10 +5 ;
 
+    
  
     var timeInterval = setInterval(function () {
         timeLeft--;
@@ -121,14 +103,33 @@ function timer(){
             timerEl.textContent ='Time: 0';
             scores.push(timeLeft)
         }
-        if (i > questionsSets.length - 1){
+        console.log(i)
+        if (i > questionsSets.length-1){
             clearInterval(timeInterval)
             scores.push(timeLeft)
         }
-
-        
-
     },1000);
+
+    questionsEl.addEventListener('click',function(event){
+        var element = event.target;
+    
+        if(!element.matches('button'))return
+        var state = element.getAttribute('data-state')
+        console.log(state)
+        if(state === 'correct'){
+            result.textContent = state
+            setQuestion()
+            return
+        }
+        if(state === 'wrong'){
+            result.textContent = state
+            timeLeft = timeLeft - 10
+            timerEl.textContent ='Time:'+ timeLeft + ' - 10';
+            setQuestion()
+            return
+        }
+        
+    })
 }
 
 function init(){
