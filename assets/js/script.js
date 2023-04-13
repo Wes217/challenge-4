@@ -45,6 +45,17 @@ var question3 = {
     opFour:'none of the above',
     an4:'wrong'
 }
+var question4 = {
+    quest: 'emty',
+    opOne:'empty',
+    an1:'empty',
+    opTwo:'convert',
+    an2:'wrong',
+    opThree:'stringify',
+    an3:'correct',
+    opFour:'none of the above',
+    an4:'wrong'
+}
 var questionsSets = [question1,question2,question3];
 var scores = []
 var names = []
@@ -63,8 +74,9 @@ startEl.addEventListener('click',function(event){
 //-----
 function setQuestion(){
     if(i > questionsSets.length - 1){
-        i=0
         scorePage()
+        i++
+        return
     }
     // console.log(i)
     question.textContent = questionsSets[i].quest
@@ -104,7 +116,7 @@ function timer(){
             scores.push(timeLeft)
         }
         console.log(i)
-        if (i > questionsSets.length-1){
+        if (i > questionsSets.length){
             clearInterval(timeInterval)
             scores.push(timeLeft)
         }
