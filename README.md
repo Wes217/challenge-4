@@ -21,4 +21,4 @@ A quiz on java script that holds scores
 
 ## Deployment
 ![https://wes217.github.io/challenge-4/]
-![quiz](./image/quiz.png)
+![quiz](assets/image/quiz.png)
